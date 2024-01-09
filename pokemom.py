@@ -2,6 +2,7 @@ from __future__ import annotations
 from abc import ABC
 from typing import Any, List
 from ataque import Ataque
+from random import randint
 
 class Pokemon(ABC):
     """
@@ -55,7 +56,15 @@ class Pokemon(ABC):
         return f"""nome: {self.nome} | tipo: {self.tipo} | hp: {self.hp}"""
         
     def atacar(self, ataque_escolhido: int, pokemon_alvo: Pokemon):
-        pokemon_alvo.__hp -= self.ataques[ataque_escolhido].dano
+        """Ataca um pokemon com o ataque escolhido usando o índice do ataque
+
+        Args:
+            ataque_escolhido (int): indice do ataque escolhido
+            pokemon_alvo (Pokemon): pokemon alvo
+        """
+        dano = self.__verificar_dano(self.ataques[ataque_escolhido], pokemon_alvo)
+        pokemon_alvo.__hp -= dano
+        print(f"""pokemon {pokemon_alvo.nome} recebeu {self.ataques[ataque_escolhido].nome} e levou {dano} de dano""")
         
     def verificar_vida(self) -> bool:
         """Verifica a vida do pokemon e retorna se está com vida zero ou menor
@@ -71,6 +80,46 @@ class Pokemon(ABC):
         return False
     
     def mostrar_ataques(self) -> None:
+        """Mostra todos os ataques do pokemon"""
         for i in range(len(self.ataques)):
             print(f"{i + 1}: {self.ataques[i]}")
+            
+    def ataque_aleatorio(self, pokemon_alvo: Pokemon):
+        """Faz um ataque aleatório no pokemon alvo
+
+        Args:
+            pokemon_alvo (Pokemon): pokemon que receberá o ataque
+        """
+        ataque_escolhido = int(randint(0, 9))
+        while ataque_escolhido + 1 > len(pokemon_alvo.ataques):
+            ataque_escolhido = int(randint(0, 9))
+        self.atacar(ataque_escolhido, pokemon_alvo)
+        
+    def __verificar_dano(self, ataque_escolhido: Ataque, pokemon_alvo: Pokemon) -> int:
+        """Verifica o dano que vai dar no pokemon alvo com base no tipo do pokemon e to ataque.
+        Se forem do mesmo tipo o dano será de 0.8x
+        Se tiver vantagem o dano será de 1.2x
+        Se tiver desvantagem será de 0.6x
+
+        Args:
+            ataque_escolhido (Ataque): Ataque usado
+            pokemon_alvo (Pokemon): pokemon que receberá o ataque
+
+        Returns:
+            int: _description_
+        """
+        
+        dano = ataque_escolhido.dano * 0.8 if ataque_escolhido.tipo == pokemon_alvo.tipo else ataque_escolhido.dano
+        
+        lista_tipo =        ["Elétrico", "Venenoso", "Água", "Lutador", "Voador", "Grama", "Inseto", "Fogo", "Psíquico", "Gelo", "Pedra", "Dragão", "Terrestre", "Normal"]
+        lista_vantagem =    ["Água", "Lutador", "Terrestre", "Inseto", "Fogo", "Psíquico", "Gelo", "Pedra", "Dragão", "Elétrico", "Venenoso", "Voador", "Grama", "_"]
+        lista_desvantagem = ["Pedra","Inseto", "Grama", "Voador", "Dragão", "Fogo", "Água", "Venenoso", "Terrestre", "Psíquico", "Elétrico", "Lutador","Gelo","_"]
+        
+        indice_tipo = lista_tipo.index(ataque_escolhido.tipo)
+        if pokemon_alvo.tipo == lista_vantagem[indice_tipo]:
+            dano = dano * 1.2
+        if pokemon_alvo.tipo == lista_desvantagem[indice_tipo]:
+            dano = dano * 0.6
+        
+        return int(dano)
         

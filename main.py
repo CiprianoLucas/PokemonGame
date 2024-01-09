@@ -1,26 +1,13 @@
-from inicializador_db import InicializadorBD
-from pokemom import Pokemon
 from pokemons_repositorio import PokemonsRepositorio
-from ataque import Ataque
-from ataques_repositorio import AtaquesRepositorio
-from ataque_pokemon_repositorio import AtaquesPokemonRepositorio
 from batalha import Batalha
-import random
+from batalhas_repositorio import BatalhasRepositorio
 
 DB_NOME = "pokemons.db"
 
-
 repositorio_pokemons = PokemonsRepositorio(DB_NOME)
+repositorio_batalha = BatalhasRepositorio(DB_NOME)
 batalha = Batalha()
-fase_jogo = 1
-
-pokemon1 = "pikachu"
-pokemon2 = "charmander"
-pokemon1 = repositorio_pokemons.escolher_pokemon(pokemon1)
-pokemon2 = repositorio_pokemons.escolher_pokemon(pokemon2)
-print(f"BATALHA: {pokemon1.nome} VS {pokemon2.nome}")
-
-
+fase_jogo = 0
 repositorio_pokemons.obter_pokemons()
 
 while True:
@@ -49,22 +36,17 @@ while True:
                     ataque_escolhido = int(input("escolha seu ataque: "))
 
                 pokemon1.atacar(ataque_escolhido - 1, pokemon2)
-                print(f"""pokemon {pokemon2.nome} recebeu {pokemon1.ataques[ataque_escolhido-1].nome} e levou {pokemon1.ataques[ataque_escolhido-1].dano} de dano""")
                 if pokemon2.verificar_vida():
                     fase_jogo += 1
                     print(f"Vitória do {pokemon1.nome}")
-                    batalha.finalizar(pokemon1, pokemon2)
+                    repositorio_batalha.inserir_batalha(pokemon1, pokemon2)
                     
             else:
-                ataque_escolhido = int(random.randint(0, 9))
-                while ataque_escolhido + 1 > len(pokemon2.ataques):
-                    ataque_escolhido = int(random.randint(0, 9))
-                pokemon2.atacar(ataque_escolhido, pokemon1)
-                print(f"""pokemon {pokemon1.nome} recebeu {pokemon2.ataques[ataque_escolhido].nome} e levou {pokemon2.ataques[ataque_escolhido-1].dano} de dano""")
+                pokemon2.ataque_aleatorio(pokemon1)
                 if pokemon1.verificar_vida():
                     fase_jogo += 1
                     print(f"Vitória do {pokemon2.nome}")
-                    batalha.finalizar(pokemon2, pokemon1)
+                    repositorio_batalha.inserir_batalha(pokemon2, pokemon1)
 
         
                     
