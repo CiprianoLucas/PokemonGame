@@ -1,0 +1,70 @@
+id,nome,dano,tipo
+1,Choque do Trovão,15,Elétrico
+2,Soco Trovão,18,Elétrico
+3,Centelha,12,Elétrico
+4,Presas Trovão,14,Elétrico
+5,Canhão de Raios,17,Elétrico
+6,Ácido,7,Venenoso
+7,Ataque Veneno,10,Venenoso
+8,Bomba de Lodo,9,Venenoso
+9,Golpe Venenoso,8,Venenoso
+10,Tóxico,5,Venenoso
+11,Jato de Água,20,Água
+12,Hidro Bomba,18,Água
+13,Surf,19,Água
+14,Bolhas,16,Água
+15,Raio de Gelo,13,Água
+16,Soco,10,Lutador
+17,Chute,11,Lutador
+18,Golpe Baixo,14,Lutador
+19,Chute Duplo,8,Lutador
+20,Chute Circular,15,Lutador
+21,Voadora,12,Voador
+22,Asas de Aço,13,Voador
+23,Vento Cortante,11,Voador
+24,Bico,10,Voador
+25,Rajada de Vento,9,Voador
+26,Chicote de Cipó,7,Grama
+27,Folha Navalha,8,Grama
+28,Semente Sanguessuga,9,Grama
+29,Dança de Pétalas,7,Grama
+30,Chicote de Vinha,6,Grama
+31,Investida de Inseto,5,Inseto
+32,Furacão de Asas,10,Inseto
+33,Bomba Venenosa,12,Inseto
+34,Picada,8,Inseto
+35,Redemoinho de Poeira,11,Inseto
+36,Bola de Fogo,14,Fogo
+37,Chama,12,Fogo
+38,Explosão de Fogo,18,Fogo
+39,Labareda,10,Fogo
+40,Roda de Fogo,16,Fogo
+41,Confusão Mental,11,Psíquico
+42,Explosão Psíquica,17,Psíquico
+43,Esfera Psíquica,15,Psíquico
+44,Choque Psíquico,13,Psíquico
+45,Ataque Zen,14,Psíquico
+46,Raio Congelante,13,Gelo
+47,Rajada de Gelo,11,Gelo
+48,Nevasca,18,Gelo
+49,Vento Gélido,10,Gelo
+50,Pulso Gélido,15,Gelo
+51,Pedregulho,12,Pedra
+52,Lança de Pedra,10,Pedra
+53,Bomba de Rocha,14,Pedra
+54,Esfera de Pedra,13,Pedra
+55,Desmoronar,16,Pedra
+56,Sopro do Dragão,15,Dragão
+57,Garra do Dragão,11,Dragão
+58,Cauda do Dragão,13,Dragão
+59,Fúria do Dragão,17,Dragão
+60,Bola de Draco,16,Dragão
+61,Terremoto,20,Terrestre
+62,Presa de Terra,18,Terrestre
+63,Terra Arrasadora,19,Terrestre
+64,Estouro de Areia,16,Terrestre
+65,Destruição de Terra,17,Terrestre
+66,Investida,9,Normal
+67,Ataque Rápido,11,Normal
+68,Golpe Normal,12,Normal
+70,Rasteira,10,Normal
