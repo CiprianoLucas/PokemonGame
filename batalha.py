@@ -34,9 +34,9 @@ class Batalha(ABC):
         """Alterna entre um jogador e outro"""
         self.__vez = not self.__vez
         if self.__vez:
-            print("Vamos lá! sua vez!")
+            print("Vez do principal")
         else:
-            print("Vez da máquina")
+            print("Vez do adversário")
             
         return self.__vez
     
