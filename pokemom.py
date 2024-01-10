@@ -3,6 +3,7 @@ from abc import ABC
 from typing import Any, List
 from ataque import Ataque
 from random import randint
+import time
 
 class Pokemon(ABC):
     """
@@ -31,6 +32,7 @@ class Pokemon(ABC):
         self.__hp = hp
         self.__id = id
         self.__ataques = ataques
+        self.__sou_robo = False
         
     @property
     def nome(self):
@@ -63,8 +65,11 @@ class Pokemon(ABC):
             pokemon_alvo (Pokemon): pokemon alvo
         """
         dano = self.__verificar_dano(self.ataques[ataque_escolhido], pokemon_alvo)
+        dano = int(pokemon_alvo.__esquivar(dano))
         pokemon_alvo.__hp -= dano
+        time.sleep(2)
         print(f"""pokemon {pokemon_alvo.nome} recebeu {self.ataques[ataque_escolhido].nome} e levou {dano} de dano""")
+        time.sleep(3)
         
     def verificar_vida(self) -> bool:
         """Verifica a vida do pokemon e retorna se está com vida zero ou menor
@@ -90,9 +95,9 @@ class Pokemon(ABC):
         Args:
             pokemon_alvo (Pokemon): pokemon que receberá o ataque
         """
-        ataque_escolhido = int(randint(0, 9))
+        ataque_escolhido = randint(0, 9)
         while ataque_escolhido + 1 > len(pokemon_alvo.ataques):
-            ataque_escolhido = int(randint(0, 9))
+            ataque_escolhido = randint(0, 9)
         self.atacar(ataque_escolhido, pokemon_alvo)
         
     def __verificar_dano(self, ataque_escolhido: Ataque, pokemon_alvo: Pokemon) -> int:
@@ -121,5 +126,49 @@ class Pokemon(ABC):
         if pokemon_alvo.tipo == lista_desvantagem[indice_tipo]:
             dano = dano * 0.6
         
-        return int(dano)
+        return dano
+    
+    def computador(self):
+        """Define que o pokemon é jogado por computador"""
+        self.__sou_robo = True
+        
+    def __esquivar(self, dano: int):
+        """Entra em um cronômetro onde:
+            inserir o número que aparecer dentro de 1 segundo anulará o ataque inimigo
+            inserir o número entre 1 e 5 segundos diminuirá o dano dependendo do tempo
+            errar o número ou passando mais que 5 segundos receberá dano completo
+        """
+        time.sleep(2)
+        numero_aleatorio = randint(0, 9)
+        if not self.__sou_robo:
+            print(f"{self.nome}! envie o número que aparecer o mais rápido possível para esquivar")
+            time.sleep(4)
+            for i in range(3, 0, -1):
+                print("." * i)
+                time.sleep(1)
+            inicio = time.time()
+            print(numero_aleatorio, "\n\n")
+            numero_digitado = int(input("Número: "))
+            fim = time.time()
+            tempo = fim - inicio
+        else:
+            tempo = randint(0, 6)
+            numero_digitado = numero_aleatorio
+            
+        if numero_digitado == numero_aleatorio and tempo <= 1:
+            dano = 0
+            print("esquivado")
+        elif numero_digitado == numero_aleatorio and 1 < tempo < 4.5:
+            dano = dano * (tempo - 1) * 0.25 + 1
+            print("pegou de raspão")
+        else:
+            print("pegou em cheio")   
+        
+        return dano
+            
+        
+
+            
+        
+        
         

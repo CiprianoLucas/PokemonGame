@@ -52,8 +52,8 @@ class AtaquesRepositorio:
     def remover_ataque(self, ataque: Ataque) -> None:
         """Remove um ataque do banco de dados."""
         query = "DELETE FROM ataques WHERE id = ?"
-        self.__executar_query(query, ataque.id)
-
+        self.__executar_query(query, ataque.id)            
+        
     def obter_ataque(self) -> List[Ataque]:
         """Obtém todos os ataques cadastrados no banco de dados."""
         query = "SELECT * FROM ataques"
