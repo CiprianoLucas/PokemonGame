@@ -32,3 +32,13 @@ Criar tabelas para Pokémon, Ataques, e registros de batalhas.
 Interface do Console:
 Desenvolver uma interface de linha de comando para interação do usuário.
 Implementar menus para seleção de Pokémon, visualização de status e escolha de ações durante a batalha.
+
+### Instalando
+
+Necessário ter Python 3 instalado.
+
+Clone o repositório, abra o cmd na pasta raiz e execute
+```cmd
+python main.py
+```
+
